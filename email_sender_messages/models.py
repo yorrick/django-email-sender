@@ -16,3 +16,9 @@ class Message(models.Model):
 
     def __unicode__(self):
         return "<Message {} {} {} (User id {})>".format(self.source, self.destination, self.content, self.user_id)
+
+    def subject(self):
+        """
+        First 15 chars are the message subject
+        """
+        return self.content[:15]

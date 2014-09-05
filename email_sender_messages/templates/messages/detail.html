@@ -1,0 +1,13 @@
+{% extends 'root.html' %}
+
+{% block content %}
+
+    <h1>{{ message.subject }}</h1>
+
+    <p>
+        <span>{{ message.source }}</span>
+        <span>{{ message.destination }}</span>
+        <span>{{ message.content }}</span>
+    </p>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>
+                <a href="/{{ message.id }}/">
+                <a href="{% url 'message:detail' message.id %}">
+                    <span>{{ message.source }}</span>
+                    <span>{{ message.destination }}</span>
+                    <span>{{ message.content }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No message have been reveived</p>
+{% endif %}
