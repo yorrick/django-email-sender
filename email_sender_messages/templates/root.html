@@ -1,0 +1,56 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django test app</title>
+
+    <link rel="stylesheet" href="{% static "css/footer.css" %}" />
+
+</head>
+<body>
+
+</div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <h1>Welcome to this django test application</h1>
+            </div>
+
+            <div class="collapse navbar-collapse row">
+
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+
+    </div>
+
+    <div class="footer">
+        <div class="container text-muted">
+            <div class="row">
+
+                <div class="col-md-6">
+                    Disclaimer: This is a test application, developped for learning purposes
+                </div>
+
+                <div class="col-md-6 text-right">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {% bootstrap_javascript %}
+
+</body>
+</html>

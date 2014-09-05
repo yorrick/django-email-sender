@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
     'email_sender_messages'
 )
 
@@ -88,3 +89,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 APPEND_SLASH=True
+
+STATIC_URL = '/static/'
+
+STATIC_ROOT = STATIC_URL
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'static_precompiler.finders.StaticPrecompilerFinder',
+)
