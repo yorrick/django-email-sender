@@ -15,6 +15,6 @@
         "date_joined": "2014-09-05T15:48:13.733Z"
     },
     "model": "auth.user",
-    "pk": 2
+    "pk": 1
 }
 ]

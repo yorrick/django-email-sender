@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, url
-
-from email_sender_messages import views
+from django_email_sender.ems_messages import views
 
 
 urlpatterns = patterns('',

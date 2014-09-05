@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from email_sender_messages.models import Message
+from django_email_sender.ems_messages.models import Message
 
 
 def index(request):
