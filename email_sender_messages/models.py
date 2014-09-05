@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date, datetime
 
 
 class Message(models.Model):
@@ -11,3 +12,7 @@ class Message(models.Model):
     source = models.CharField(max_length=50)
     destination = models.CharField(max_length=50)
     content = models.CharField(max_length=160)
+    date = models.DateTimeField(auto_now=True, default=datetime.now())
+
+    def __unicode__(self):
+        return "<Message {} {} {} (User id {})>".format(self.source, self.destination, self.content, self.user_id)
