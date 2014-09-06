@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import date, datetime
+from datetime import datetime
+from django.utils.translation import ugettext as _
 
 
 class Message(models.Model):
@@ -9,10 +10,10 @@ class Message(models.Model):
     """
 
     user = models.ForeignKey(User)
-    source = models.CharField(max_length=50)
-    destination = models.CharField(max_length=50)
-    content = models.CharField(max_length=160)
-    date = models.DateTimeField(auto_now=True, default=datetime.now())
+    source = models.CharField(_('Source'), max_length=50)
+    destination = models.CharField(_('Destination'), max_length=50)
+    content = models.CharField(_('Content'), max_length=160)
+    date = models.DateTimeField(_('Date'), auto_now=True, default=datetime.now())
 
     def __unicode__(self):
         return "<Message {} {} {} (User id {})>".format(self.source, self.destination, self.content, self.user_id)

@@ -6,6 +6,7 @@ from django.forms import ModelForm
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 
 import random
 import logging
@@ -32,7 +33,7 @@ class MessageForm(ModelForm):
         logger.debug('Cleaning content field: {}'.format(content))
 
         if 'toto' in content:
-            raise ValidationError("This content is not allowed")
+            raise ValidationError(_("This content is not allowed"))
         else:
             return content
 

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from os.path import dirname, join, abspath, pardir
+from os.path import dirname, join
 
 PROJECT_ROOT = dirname(__file__)
 FRONTEND_ROOT = join(PROJECT_ROOT, 'frontend')
@@ -44,6 +44,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -51,6 +52,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.i18n',
+    'django.contrib.auth.context_processors.auth'
+)
+
 
 ROOT_URLCONF = 'django_email_sender.urls'
 
@@ -73,17 +80,30 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
+LANGUAGE_CODE = 'fr'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ('fr', 'French'),
+    ('en', 'English'),
+    )
 
 TIME_ZONE = 'UTC'
 
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
 USE_I18N = True
 
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale.
 USE_L10N = True
 
+# If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
 
+
+LOCALE_PATHS = (
+    join(PROJECT_ROOT, 'locale'),
+)
 
 APPEND_SLASH=True
 
