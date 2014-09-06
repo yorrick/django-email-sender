@@ -2,8 +2,8 @@ from django.test import TestCase
 from django_email_sender.ems_messages.api import save_message
 from django_email_sender.ems_messages.models import Message
 from django.core.urlresolvers import reverse
-from django.utils.translation import activate, get_language
-import contextlib
+
+from django_email_sender.ems_messages.utils import language
 
 
 class ApiTest(TestCase):
@@ -62,12 +62,3 @@ class ViewTest(TestCase):
         # 200 means error
         self.assertEqual(response.status_code, 200)
 
-
-@contextlib.contextmanager
-def language(code):
-    old_lang = get_language()
-    activate(code)
-    try:
-        yield
-    finally:
-        activate(old_lang)
