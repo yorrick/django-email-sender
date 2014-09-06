@@ -10,6 +10,8 @@ from django.core.urlresolvers import reverse
 import random
 import logging
 
+from django_email_sender.ems_messages.api import save_message
+
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +31,7 @@ class MessageForm(ModelForm):
         content = self.cleaned_data['content']
         logger.debug('Cleaning content field: {}'.format(content))
 
-        if 'the' in content:
+        if 'toto' in content:
             raise ValidationError("This content is not allowed")
         else:
             return content
@@ -42,7 +44,7 @@ def index(request):
 
         if form.is_valid():
             logger.debug('Form is valid, message is {}'.format(form.instance))
-            form.instance.save()
+            save_message(form.instance)
             return HttpResponseRedirect(reverse('message:index', args=tuple()))
         else:
             logger.debug('Form is not valid: {}'.format(form.errors))
