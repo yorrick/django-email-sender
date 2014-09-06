@@ -1,3 +1,50 @@
 from django.test import TestCase
+from django_email_sender.ems_messages.api import save_message
+from django_email_sender.ems_messages.models import Message
+from django.core.urlresolvers import reverse
+from django.utils.translation import activate, get_language
+import contextlib
 
-# Create your tests here.
+
+class ApiTest(TestCase):
+
+    fixtures = ['users.json', 'messages.json']
+
+    def test_save(self):
+        """
+        Test that save is working
+        """
+        message = Message(user_id=1, source="the source", destination="the dest", content="the content")
+
+        self.assertTrue(message.id is None)
+        returned_message = save_message(message)
+        self.assertTrue(returned_message.id is not None)
+
+
+class ViewTest(TestCase):
+
+    fixtures = ['users.json', 'messages.json']
+
+    def test_index_display(self):
+        response = self.client.get(reverse('message:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Welcome")
+        self.assertEqual(len(response.context['message_list']), 2)
+
+    def test_french_index_display(self):
+        with language('fr'):
+            response = self.client.get(reverse('message:index'))
+            self.assertEqual(response.status_code, 200)
+            self.assertContains(response, "Bienvenue")
+            self.assertEqual(len(response.context['message_list']), 2)
+
+
+
+@contextlib.contextmanager
+def language(code):
+    old_lang = get_language()
+    activate(code)
+    try:
+        yield
+    finally:
+        activate(old_lang)
