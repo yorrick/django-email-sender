@@ -1,5 +1,6 @@
-Django==1.7
-distribute==0.6.24
-django-bootstrap3==4.11.0
-psycopg2==2.5.4
-wsgiref==0.1.2
+-r requirement-dev.txt
+
+uwsgi
+werkzeug
+dj-database-url
+dj_static
