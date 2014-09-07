@@ -7,6 +7,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from django.utils.cache import get_cache_key
 
 import random
 import logging
@@ -38,6 +41,7 @@ class MessageForm(ModelForm):
             return content
 
 
+@cache_page(60 * 15)
 def index(request):
 
     if request.method == "POST":
@@ -46,6 +50,11 @@ def index(request):
         if form.is_valid():
             logger.debug('Form is valid, message is {}'.format(form.instance))
             save_message(form.instance)
+
+            # basic behavior: invalidate page cache
+            key = get_cache_key(request)
+            cache.delete(key)
+
             return HttpResponseRedirect(reverse('message:index', args=tuple()))
         else:
             logger.debug('Form is not valid: {}'.format(form.errors))

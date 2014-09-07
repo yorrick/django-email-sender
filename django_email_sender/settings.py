@@ -42,17 +42,21 @@ INSTALLED_APPS = (
     'django_email_sender.ems_messages'
 )
 
+
 MIDDLEWARE_CLASSES = (
     'django_email_sender.ems_messages.utils.TimerMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+#    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+#    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
@@ -81,6 +85,16 @@ DATABASES = {
 
 # do not tie transactions to http requests
 ATOMIC_REQUESTS = False
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'LOCATION': 'unique-snowflake'
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
