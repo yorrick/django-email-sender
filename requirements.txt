@@ -1,4 +1,4 @@
--r requirement-dev.txt
+-r requirements-dev.txt
 
 uwsgi
 werkzeug
