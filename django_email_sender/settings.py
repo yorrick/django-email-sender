@@ -79,6 +79,9 @@ DATABASES = {
         },
 }
 
+# do not tie transactions to http requests
+ATOMIC_REQUESTS = False
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 LANGUAGE_CODE = 'en'
